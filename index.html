@@ -120,186 +120,28 @@ body::before{
 body.slow-conn .turni-intro{animation:none !important;opacity:0;visibility:hidden}
 body.slow-conn .nav{opacity:1 !important;animation:none !important}
 
-/* ═══ HERO · diagonal split · duas fotos encontram no centro ═══ */
-.hero{position:relative;background:var(--black);color:#fff;min-height:100vh;overflow:hidden;z-index:2}
-/* Triângulo superior-esquerdo · empresário */
-.hero-emp-bg{
-  position:absolute;inset:0;z-index:1;
-  background-image:url('img/04-hero-empresario.jpg');
-  background-size:cover;
-  background-position:25% 30%;
-  clip-path:polygon(0 0, 100% 0, 0 100%);
-  -webkit-clip-path:polygon(0 0, 100% 0, 0 100%);
-  filter:contrast(1.06) brightness(.78);
-  opacity:0;
-  animation:meet-emp 1.6s cubic-bezier(.16,1,.3,1) .3s forwards;
-}
-.hero-emp-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,
-    rgba(40,15,15,.25) 0%,
-    rgba(184,132,47,.12) 30%,
-    rgba(15,8,5,.5) 75%,
-    rgba(0,0,0,.85) 100%);
-}
-/* Triângulo inferior-direito · trabalhador */
-.hero-pro-bg{
-  position:absolute;inset:0;z-index:1;
-  background-image:url('img/turnitrabalhadordiagonal.png');
-  background-size:cover;
-  background-position:75% 75%;
-  clip-path:polygon(100% 0, 100% 100%, 0 100%);
-  -webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);
-  filter:contrast(1.06) brightness(.85) saturate(1.1);
-  opacity:0;
-  animation:meet-pro 1.6s cubic-bezier(.16,1,.3,1) 1.5s forwards;
-}
-.hero-pro-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,
-    rgba(0,0,0,.85) 0%,
-    rgba(8,18,12,.55) 25%,
-    rgba(45,95,63,.18) 65%,
-    rgba(58,170,104,.22) 100%);
-}
-/* Linha luminosa · ponto de encontro */
-.hero-diagonal-glow{
-  position:absolute;inset:0;pointer-events:none;z-index:3;
-  opacity:0;animation:fade-glow 1.6s ease 2.4s forwards;
-}
-.hero-diagonal-glow::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,
-    transparent 49.85%,
-    rgba(255,255,255,.18) 49.97%,
-    rgba(255,255,255,.32) 50%,
-    rgba(255,255,255,.18) 50.03%,
-    transparent 50.15%);
-}
-.hero-diagonal-glow::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 48%,rgba(255,255,255,.05) 50%,transparent 52%);
-  filter:blur(50px);
-}
-/* Particulado sutil · drift */
-.hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
-  background-image:
-    radial-gradient(circle at 12% 18%,rgba(255,255,255,.04) 1px,transparent 1.5px),
-    radial-gradient(circle at 78% 42%,rgba(255,255,255,.05) 1px,transparent 1.5px),
-    radial-gradient(circle at 35% 76%,rgba(255,255,255,.03) 1px,transparent 1.5px),
-    radial-gradient(circle at 88% 88%,rgba(255,255,255,.04) 1px,transparent 1.5px);
-  background-size:600px 600px,400px 400px,500px 500px,700px 700px;
-  animation:drift 60s linear infinite;
-}
-@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-60px,-40px)}}
-@keyframes meet-emp{
-  0%{clip-path:polygon(0 0, 0 0, 0 0);-webkit-clip-path:polygon(0 0, 0 0, 0 0);opacity:0}
-  100%{clip-path:polygon(0 0, 100% 0, 0 100%);-webkit-clip-path:polygon(0 0, 100% 0, 0 100%);opacity:1}
-}
-@keyframes meet-pro{
-  0%{clip-path:polygon(100% 100%, 100% 100%, 100% 100%);-webkit-clip-path:polygon(100% 100%, 100% 100%, 100% 100%);opacity:0}
-  100%{clip-path:polygon(100% 0, 100% 100%, 0 100%);-webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);opacity:1}
-}
-@keyframes fade-glow{0%{opacity:0}100%{opacity:.5}}
-/* Textos do hero */
-.hero-content{position:relative;z-index:10;width:100%;min-height:calc(100vh - 90px);padding:104px 48px 80px}
-.hero-emp-text{position:absolute;top:13%;left:4%;z-index:5;text-align:left;max-width:30%;min-width:240px}
-.hero-pro-text{position:absolute;bottom:7%;right:4%;z-index:5;text-align:right;max-width:30%;min-width:240px}
-.hero-side-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:18px;display:inline-flex;align-items:center;gap:12px;opacity:0}
-.hero-emp-text .hero-side-tag{animation:fade-tag .9s ease 1.0s forwards}
-.hero-pro-text .hero-side-tag{animation:fade-tag .9s ease 2.2s forwards;flex-direction:row-reverse}
-.hero-emp-text .hero-side-tag::before{content:'';width:32px;height:1px;background:rgba(232,69,69,.7)}
-.hero-pro-text .hero-side-tag::before{content:'';width:32px;height:1px;background:rgba(58,170,104,.7)}
-@keyframes fade-tag{0%{opacity:0}100%{opacity:1}}
-.word-emp{
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,120px);letter-spacing:6px;line-height:.92;
-  color:#E84545;text-shadow:0 2px 8px rgba(0,0,0,.95),0 4px 28px rgba(232,69,69,.6),0 8px 48px rgba(90,21,24,.85);
-  margin:0;opacity:0;transform:translateX(-80px);animation:slide-emp 1.4s cubic-bezier(.16,1,.3,1) .8s forwards;
-}
-@keyframes slide-emp{to{opacity:1;transform:translateX(0)}}
-.word-pro{
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,120px);letter-spacing:6px;line-height:.92;
-  color:#3AAA68;text-shadow:0 2px 8px rgba(0,0,0,.95),0 4px 28px rgba(58,170,104,.55),0 8px 48px rgba(0,168,104,.7);
-  margin:0 0 12px;opacity:0;transform:translateX(80px);animation:slide-pro 1.4s cubic-bezier(.16,1,.3,1) 2s forwards;
-}
-@keyframes slide-pro{to{opacity:1;transform:translateX(0)}}
+/* ═══ HERO diagonal ═══ */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:radial-gradient(circle at 50% 60%,rgba(0,168,104,.08) 0%,transparent 60%),#050807;z-index:2}
+.hero-side{position:relative;display:flex;flex-direction:column;justify-content:center;padding:120px 64px 80px;z-index:2}
+.hero-side.emp{align-items:flex-start;border-right:1px solid rgba(255,255,255,.06)}
+.hero-side.pro{align-items:flex-end;text-align:right}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--logo-green-soft);margin-bottom:24px;display:inline-flex;align-items:center;gap:10px;opacity:0;animation:fade-up 1s cubic-bezier(.16,1,.3,1) 4.7s forwards}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--logo-green-soft)}
+.pro .hero-eyebrow::before{display:none}
+.pro .hero-eyebrow::after{content:'';width:32px;height:1px;background:var(--logo-green-soft);margin-left:10px}
+.hero-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,7vw,108px);letter-spacing:1px;line-height:.92;color:#fff;margin-bottom:24px;opacity:0;animation:fade-up 1.2s cubic-bezier(.16,1,.3,1) 4.9s forwards}
+.hero-h .accent{color:var(--logo-green-soft)}
+.hero-d{font-size:18px;line-height:1.55;color:rgba(255,255,255,.78);max-width:440px;margin-bottom:36px;opacity:0;animation:fade-up 1.2s cubic-bezier(.16,1,.3,1) 5.1s forwards}
+.hero-d b{color:#fff;font-weight:500}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:.1px;cursor:pointer;transition:transform .15s,box-shadow .2s;border:none;opacity:0;animation:fade-up 1.2s cubic-bezier(.16,1,.3,1) 5.3s forwards}
+.hero-btn.emp{background:var(--vinho);color:#0F0F0F;box-shadow:0 8px 24px rgba(184,132,47,.35)}
+.hero-btn.emp:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(184,132,47,.5)}
+.hero-btn.pro{background:var(--logo-green);color:#fff;box-shadow:0 8px 24px rgba(0,168,104,.4)}
+.hero-btn.pro:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,168,104,.55)}
+.hero-btn svg{width:16px;height:16px;stroke-width:2}
 
-/* Texto empresário · superior esquerdo */
-.hero-emp-text{
-  position:absolute;top:18%;left:5%;z-index:5;text-align:left;max-width:50%;
-  opacity:0;animation:hero-fade 1.2s cubic-bezier(.16,1,.3,1) 4.7s forwards;
-}
-.hero-eyebrow-line{
-  display:inline-flex;align-items:center;gap:14px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:3.5px;text-transform:uppercase;
-  color:#E84545;margin-bottom:24px;
-  text-shadow:0 2px 12px rgba(0,0,0,.5);
-}
-.hero-eyebrow-line::before{content:'';width:42px;height:1px;background:#E84545}
-.hero-emp-text .word-emp{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(72px,12vw,200px);
-  letter-spacing:1px;line-height:.85;color:#E84545;
-  text-shadow:0 6px 40px rgba(0,0,0,.65), 0 0 80px rgba(232,69,69,.18);
-  font-weight:400;
-}
-
-/* Texto trabalhador · inferior direito */
-.hero-pro-text{
-  position:absolute;bottom:14%;right:5%;z-index:5;text-align:right;max-width:50%;
-  opacity:0;animation:hero-fade 1.2s cubic-bezier(.16,1,.3,1) 5.0s forwards;
-}
-.hero-pro-text .word-pro{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(72px,12vw,200px);
-  letter-spacing:1px;line-height:.85;color:#7BC299;
-  text-shadow:0 6px 40px rgba(0,0,0,.65), 0 0 80px rgba(0,168,104,.22);
-  font-weight:400;margin-bottom:24px;
-}
-.hero-eyebrow-line.right{
-  flex-direction:row-reverse;color:#7BC299;
-  text-shadow:0 2px 12px rgba(0,0,0,.5);
-}
-.hero-eyebrow-line.right::before{background:#7BC299}
-
-@keyframes hero-fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-/* Scroll indicator · centro inferior */
-.hero-scroll-indicator{
-  position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:5;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  opacity:0;animation:hero-fade 1s cubic-bezier(.16,1,.3,1) 5.4s forwards;
-  pointer-events:none;
-}
-.hero-scroll-indicator .lbl{
-  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,.7);text-shadow:0 2px 8px rgba(0,0,0,.5);
-}
-.hero-scroll-indicator .line{
-  width:1px;height:42px;background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,transparent 100%);
-  animation:scroll-pulse 2.4s ease-in-out infinite;
-}
-@keyframes scroll-pulse{
-  0%,100%{transform:scaleY(1);opacity:.5}
-  50%{transform:scaleY(1.4);opacity:1}
-}
-
-/* Vinheta sutil nas bordas para foco no centro */
-.hero::after{
-  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.35) 100%);
-}
-
-@media(max-width:980px){
-  .hero-bg{background-position:center}
-  .hero-emp-text{top:12%;left:6%;max-width:80%}
-  .hero-pro-text{bottom:12%;right:6%;max-width:80%}
-  .hero-emp-text .word-emp,.hero-pro-text .word-pro{font-size:clamp(54px,16vw,110px)}
-  .hero-eyebrow-line{font-size:10px;letter-spacing:2.5px}
-}
-
-  /* ═══ STORY STAGE · 5 atos × 2 personas ═══ */
+/* ═══ STORY STAGE · 5 atos × 2 personas ═══ */
 .story{position:relative;padding:120px 32px;background:linear-gradient(180deg,#0F0F0F 0%,#0A0A0A 100%);border-top:1px solid var(--line);z-index:2}
 .story-stage-bg{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -344,14 +186,12 @@ body.slow-conn .nav{opacity:1 !important;animation:none !important}
 .story-p b{color:#fff;font-weight:500}
 .story-nav{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:32px}
 .story-act-btns{display:flex;gap:8px}
-.story-act-btn{position:relative;overflow:hidden;
+.story-act-btn{
   padding:10px 18px;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);
   border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;
 }
-.story-act-btn.active{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.4);box-shadow:0 4px 16px rgba(255,255,255,.08)}
-.story-act-btn.active::before{content:'';position:absolute;left:0;bottom:0;height:2px;background:#fff;width:0%;animation:progress-bar 6s linear forwards}
-@keyframes progress-bar{0%{width:0}100%{width:100%}}
-.story-act-btn:hover:not(.active){border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-1px)}
+.story-act-btn.active{background:#fff;color:#0F0F0F;border-color:#fff}
+.story-act-btn:hover:not(.active){border-color:rgba(255,255,255,.4);color:#fff}
 .story-arrow{
   width:42px;height:42px;border-radius:50%;background:transparent;border:1px solid rgba(255,255,255,.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;
 }
@@ -907,24 +747,19 @@ body.tour-active{ padding-bottom:160px !important }
 
 <div class="turni-intro">TURN<span class="di">I</span><span class="de">.</span></div>
 
-<!-- ═══ HERO · diagonal split · duas fotos se encontram ═══ -->
+<!-- ═══ HERO diagonal split ═══ -->
 <section class="hero">
-  <div class="hero-emp-bg"></div>
-  <div class="hero-pro-bg"></div>
-  <div class="hero-diagonal-glow"></div>
-  <div class="hero-content">
-    <div class="hero-emp-text">
-      <div class="hero-side-tag">empresário · a dor</div>
-      <h1 class="word-emp">FALTOU<br>GENTE.</h1>
-    </div>
-    <div class="hero-pro-text">
-      <h1 class="word-pro">O TURNO<br>É SEU.</h1>
-      <div class="hero-side-tag">trabalhador · a escolha</div>
-    </div>
+  <div class="hero-side emp">
+    <div class="hero-eyebrow">para quem contrata</div>
+    <h1 class="hero-h">COBRIMOS<br>O SEU <span class="accent">PRÓXIMO</span><br>TURNO.</h1>
+    <p class="hero-d">Falta gente na sexta? Chef sumiu? <b>Em 2 horas</b> a TURN<span class="di">I</span><span class="de">.</span> coloca o profissional certo na sua porta · com checklist · com PIN bilateral · com pagamento Pagar.me nativo.</p>
+    <a class="hero-btn emp" href="app.html#/cadastro/emp">Quero cobrir um turno <i data-lucide="arrow-right"></i></a>
   </div>
-  <div class="hero-scroll-indicator">
-    <div class="lbl">scroll · ver o porquê</div>
-    <div class="line"></div>
+  <div class="hero-side pro">
+    <div class="hero-eyebrow">para quem trabalha</div>
+    <h1 class="hero-h">O TURNO<br>É <span class="accent">SEU.</span><br>SEMPRE.</h1>
+    <p class="hero-d">Sua agenda. Seu preço. <b>Pix em 15 minutos</b> após o check-out. Sem CLT, sem submissão · com cartão de saúde, HUB físico no Itaim e trilha de níveis.</p>
+    <a class="hero-btn pro" href="app.html#/cadastro/wkr">Quero turnificar <i data-lucide="arrow-right"></i></a>
   </div>
 </section>
 
@@ -1373,59 +1208,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }catch(e){}
 
-  /* Story stage · intro preview T-U-R-N-I + progress bar */
+  /* Story stage navigation */
   (function(){
     const empCards = document.querySelectorAll('.story-col.emp .story-card');
     const proCards = document.querySelectorAll('.story-col.pro .story-card');
-    const dots     = document.querySelectorAll('#storyProgress button');
-    const prev     = document.getElementById('storyPrev');
-    const next     = document.getElementById('storyNext');
-    const stage    = document.getElementById('story-stage');
-    const TOTAL    = 5;
-    const LETRAS   = ['T','U','R','N','I'];
-    let cur = 0, introPlayed = false;
-
-    function showAct(i){
-      cur = ((i % TOTAL) + TOTAL) % TOTAL;
-      [empCards, proCards].forEach(group =>
-        group.forEach((c, idx) => c.classList.toggle('active', idx === cur))
-      );
-      dots.forEach((d, idx) => {
-        d.classList.toggle('active', idx === cur);
-        if(idx === cur){
-          /* reinicia a animação da barra de progresso */
-          d.style.animation = 'none';
-          void d.offsetWidth;
-          d.style.animation = '';
-        }
+    const dots = document.querySelectorAll('#storyProgress button');
+    const prev = document.getElementById('storyPrev');
+    const next = document.getElementById('storyNext');
+    let cur = 0;
+    function show(i){
+      cur = Math.max(0, Math.min(4, i));
+      [empCards, proCards].forEach(group => {
+        group.forEach((c, idx) => c.classList.toggle('active', idx === cur));
       });
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === cur));
     }
-
-    /* Intro preview · monta T·U·R·N·I ato a ato ao entrar no viewport */
-    function playIntro(){
-      if(introPlayed) return;
-      introPlayed = true;
-      let i = 0;
-      function step(){
-        if(i >= TOTAL){ setTimeout(() => showAct(0), 600); return; }
-        showAct(i++);
-        setTimeout(step, 520);
-      }
-      setTimeout(step, 350);
-    }
-
-    if('IntersectionObserver' in window){
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting){ playIntro(); io.disconnect(); } });
-      }, { threshold: 0.3 });
-      if(stage) io.observe(stage);
-    } else {
-      setTimeout(playIntro, 1200);
-    }
-
-    if(prev) prev.addEventListener('click', () => showAct(cur - 1));
-    if(next) next.addEventListener('click', () => showAct(cur + 1));
-    dots.forEach((d, idx) => d.addEventListener('click', () => showAct(idx)));
+    if(prev) prev.addEventListener('click', () => show(cur === 0 ? 4 : cur - 1));
+    if(next) next.addEventListener('click', () => show(cur === 4 ? 0 : cur + 1));
+    dots.forEach((d, idx) => d.addEventListener('click', () => show(idx)));
   })();
 
   /* Calculadora · turnos × valor → renda mensal */
