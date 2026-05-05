@@ -120,40 +120,110 @@ body::before{
 body.slow-conn .turni-intro{animation:none !important;opacity:0;visibility:hidden}
 body.slow-conn .nav{opacity:1 !important;animation:none !important}
 
-/* ═══ HERO · fullscreen diagonal · foto + overlay vermelho/verde + tipografia gigante ═══ */
-.hero{
-  position:relative;
-  min-height:100vh;
-  width:100%;
-  overflow:hidden;
-  background:#000;
-  z-index:2;
-}
-.hero-bg{
+/* ═══ HERO · diagonal split · duas fotos encontram no centro ═══ */
+.hero{position:relative;background:var(--black);color:#fff;min-height:100vh;overflow:hidden;z-index:2}
+/* Triângulo superior-esquerdo · empresário */
+.hero-emp-bg{
   position:absolute;inset:0;z-index:1;
   background-image:url('img/04-hero-empresario.jpg');
   background-size:cover;
-  background-position:center 35%;
-  filter:saturate(.92) contrast(1.05);
+  background-position:25% 30%;
+  clip-path:polygon(0 0, 100% 0, 0 100%);
+  -webkit-clip-path:polygon(0 0, 100% 0, 0 100%);
+  filter:contrast(1.06) brightness(.78);
+  opacity:0;
+  animation:meet-emp 1.6s cubic-bezier(.16,1,.3,1) .3s forwards;
 }
-/* Overlay vermelho · top-left diagonal */
-.hero-bg::before{
+.hero-emp-bg::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,
-    rgba(94,21,24,.78) 0%,
-    rgba(126,29,34,.55) 22%,
-    rgba(0,0,0,.35) 42%,
-    rgba(0,0,0,.35) 58%,
-    rgba(15,40,24,.55) 78%,
-    rgba(15,40,24,.78) 100%);
-  pointer-events:none;
+    rgba(40,15,15,.25) 0%,
+    rgba(184,132,47,.12) 30%,
+    rgba(15,8,5,.5) 75%,
+    rgba(0,0,0,.85) 100%);
 }
-/* Linha diagonal sutil · separação simbólica */
-.hero-bg::after{
+/* Triângulo inferior-direito · trabalhador */
+.hero-pro-bg{
+  position:absolute;inset:0;z-index:1;
+  background-image:url('img/turnitrabalhadordiagonal.png');
+  background-size:cover;
+  background-position:75% 75%;
+  clip-path:polygon(100% 0, 100% 100%, 0 100%);
+  -webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);
+  filter:contrast(1.06) brightness(.85) saturate(1.1);
+  opacity:0;
+  animation:meet-pro 1.6s cubic-bezier(.16,1,.3,1) 1.5s forwards;
+}
+.hero-pro-bg::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg, transparent 49.6%, rgba(255,255,255,.05) 50%, transparent 50.4%);
-  pointer-events:none;
+  background:linear-gradient(135deg,
+    rgba(0,0,0,.85) 0%,
+    rgba(8,18,12,.55) 25%,
+    rgba(45,95,63,.18) 65%,
+    rgba(58,170,104,.22) 100%);
 }
+/* Linha luminosa · ponto de encontro */
+.hero-diagonal-glow{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  opacity:0;animation:fade-glow 1.6s ease 2.4s forwards;
+}
+.hero-diagonal-glow::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,
+    transparent 49.85%,
+    rgba(255,255,255,.18) 49.97%,
+    rgba(255,255,255,.32) 50%,
+    rgba(255,255,255,.18) 50.03%,
+    transparent 50.15%);
+}
+.hero-diagonal-glow::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 48%,rgba(255,255,255,.05) 50%,transparent 52%);
+  filter:blur(50px);
+}
+/* Particulado sutil · drift */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background-image:
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.04) 1px,transparent 1.5px),
+    radial-gradient(circle at 78% 42%,rgba(255,255,255,.05) 1px,transparent 1.5px),
+    radial-gradient(circle at 35% 76%,rgba(255,255,255,.03) 1px,transparent 1.5px),
+    radial-gradient(circle at 88% 88%,rgba(255,255,255,.04) 1px,transparent 1.5px);
+  background-size:600px 600px,400px 400px,500px 500px,700px 700px;
+  animation:drift 60s linear infinite;
+}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-60px,-40px)}}
+@keyframes meet-emp{
+  0%{clip-path:polygon(0 0, 0 0, 0 0);-webkit-clip-path:polygon(0 0, 0 0, 0 0);opacity:0}
+  100%{clip-path:polygon(0 0, 100% 0, 0 100%);-webkit-clip-path:polygon(0 0, 100% 0, 0 100%);opacity:1}
+}
+@keyframes meet-pro{
+  0%{clip-path:polygon(100% 100%, 100% 100%, 100% 100%);-webkit-clip-path:polygon(100% 100%, 100% 100%, 100% 100%);opacity:0}
+  100%{clip-path:polygon(100% 0, 100% 100%, 0 100%);-webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);opacity:1}
+}
+@keyframes fade-glow{0%{opacity:0}100%{opacity:.5}}
+/* Textos do hero */
+.hero-content{position:relative;z-index:10;width:100%;min-height:calc(100vh - 90px);padding:104px 48px 80px}
+.hero-emp-text{position:absolute;top:13%;left:4%;z-index:5;text-align:left;max-width:30%;min-width:240px}
+.hero-pro-text{position:absolute;bottom:7%;right:4%;z-index:5;text-align:right;max-width:30%;min-width:240px}
+.hero-side-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:18px;display:inline-flex;align-items:center;gap:12px;opacity:0}
+.hero-emp-text .hero-side-tag{animation:fade-tag .9s ease 1.0s forwards}
+.hero-pro-text .hero-side-tag{animation:fade-tag .9s ease 2.2s forwards;flex-direction:row-reverse}
+.hero-emp-text .hero-side-tag::before{content:'';width:32px;height:1px;background:rgba(232,69,69,.7)}
+.hero-pro-text .hero-side-tag::before{content:'';width:32px;height:1px;background:rgba(58,170,104,.7)}
+@keyframes fade-tag{0%{opacity:0}100%{opacity:1}}
+.word-emp{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,120px);letter-spacing:6px;line-height:.92;
+  color:#E84545;text-shadow:0 2px 8px rgba(0,0,0,.95),0 4px 28px rgba(232,69,69,.6),0 8px 48px rgba(90,21,24,.85);
+  margin:0;opacity:0;transform:translateX(-80px);animation:slide-emp 1.4s cubic-bezier(.16,1,.3,1) .8s forwards;
+}
+@keyframes slide-emp{to{opacity:1;transform:translateX(0)}}
+.word-pro{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,120px);letter-spacing:6px;line-height:.92;
+  color:#3AAA68;text-shadow:0 2px 8px rgba(0,0,0,.95),0 4px 28px rgba(58,170,104,.55),0 8px 48px rgba(0,168,104,.7);
+  margin:0 0 12px;opacity:0;transform:translateX(80px);animation:slide-pro 1.4s cubic-bezier(.16,1,.3,1) 2s forwards;
+}
+@keyframes slide-pro{to{opacity:1;transform:translateX(0)}}
 
 /* Texto empresário · superior esquerdo */
 .hero-emp-text{
@@ -274,12 +344,14 @@ body.slow-conn .nav{opacity:1 !important;animation:none !important}
 .story-p b{color:#fff;font-weight:500}
 .story-nav{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:32px}
 .story-act-btns{display:flex;gap:8px}
-.story-act-btn{
+.story-act-btn{position:relative;overflow:hidden;
   padding:10px 18px;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);
   border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;
 }
-.story-act-btn.active{background:#fff;color:#0F0F0F;border-color:#fff}
-.story-act-btn:hover:not(.active){border-color:rgba(255,255,255,.4);color:#fff}
+.story-act-btn.active{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.4);box-shadow:0 4px 16px rgba(255,255,255,.08)}
+.story-act-btn.active::before{content:'';position:absolute;left:0;bottom:0;height:2px;background:#fff;width:0%;animation:progress-bar 6s linear forwards}
+@keyframes progress-bar{0%{width:0}100%{width:100%}}
+.story-act-btn:hover:not(.active){border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-1px)}
 .story-arrow{
   width:42px;height:42px;border-radius:50%;background:transparent;border:1px solid rgba(255,255,255,.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;
 }
@@ -835,16 +907,20 @@ body.tour-active{ padding-bottom:160px !important }
 
 <div class="turni-intro">TURN<span class="di">I</span><span class="de">.</span></div>
 
-<!-- ═══ HERO · fullscreen diagonal · foto cobrindo · tipografia gigante ═══ -->
+<!-- ═══ HERO · diagonal split · duas fotos se encontram ═══ -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-emp-text">
-    <div class="hero-eyebrow-line">empresário · a dor</div>
-    <h1 class="word-emp">FALTOU<br>GENTE.</h1>
-  </div>
-  <div class="hero-pro-text">
-    <h1 class="word-pro">O TURNO<br>É SEU.</h1>
-    <div class="hero-eyebrow-line right">trabalhador · a escolha</div>
+  <div class="hero-emp-bg"></div>
+  <div class="hero-pro-bg"></div>
+  <div class="hero-diagonal-glow"></div>
+  <div class="hero-content">
+    <div class="hero-emp-text">
+      <div class="hero-side-tag">empresário · a dor</div>
+      <h1 class="word-emp">FALTOU<br>GENTE.</h1>
+    </div>
+    <div class="hero-pro-text">
+      <h1 class="word-pro">O TURNO<br>É SEU.</h1>
+      <div class="hero-side-tag">trabalhador · a escolha</div>
+    </div>
   </div>
   <div class="hero-scroll-indicator">
     <div class="lbl">scroll · ver o porquê</div>
@@ -1297,24 +1373,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }catch(e){}
 
-  /* Story stage navigation */
+  /* Story stage · intro preview T-U-R-N-I + progress bar */
   (function(){
     const empCards = document.querySelectorAll('.story-col.emp .story-card');
     const proCards = document.querySelectorAll('.story-col.pro .story-card');
-    const dots = document.querySelectorAll('#storyProgress button');
-    const prev = document.getElementById('storyPrev');
-    const next = document.getElementById('storyNext');
-    let cur = 0;
-    function show(i){
-      cur = Math.max(0, Math.min(4, i));
-      [empCards, proCards].forEach(group => {
-        group.forEach((c, idx) => c.classList.toggle('active', idx === cur));
+    const dots     = document.querySelectorAll('#storyProgress button');
+    const prev     = document.getElementById('storyPrev');
+    const next     = document.getElementById('storyNext');
+    const stage    = document.getElementById('story-stage');
+    const TOTAL    = 5;
+    const LETRAS   = ['T','U','R','N','I'];
+    let cur = 0, introPlayed = false;
+
+    function showAct(i){
+      cur = ((i % TOTAL) + TOTAL) % TOTAL;
+      [empCards, proCards].forEach(group =>
+        group.forEach((c, idx) => c.classList.toggle('active', idx === cur))
+      );
+      dots.forEach((d, idx) => {
+        d.classList.toggle('active', idx === cur);
+        if(idx === cur){
+          /* reinicia a animação da barra de progresso */
+          d.style.animation = 'none';
+          void d.offsetWidth;
+          d.style.animation = '';
+        }
       });
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === cur));
     }
-    if(prev) prev.addEventListener('click', () => show(cur === 0 ? 4 : cur - 1));
-    if(next) next.addEventListener('click', () => show(cur === 4 ? 0 : cur + 1));
-    dots.forEach((d, idx) => d.addEventListener('click', () => show(idx)));
+
+    /* Intro preview · monta T·U·R·N·I ato a ato ao entrar no viewport */
+    function playIntro(){
+      if(introPlayed) return;
+      introPlayed = true;
+      let i = 0;
+      function step(){
+        if(i >= TOTAL){ setTimeout(() => showAct(0), 600); return; }
+        showAct(i++);
+        setTimeout(step, 520);
+      }
+      setTimeout(step, 350);
+    }
+
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){ playIntro(); io.disconnect(); } });
+      }, { threshold: 0.3 });
+      if(stage) io.observe(stage);
+    } else {
+      setTimeout(playIntro, 1200);
+    }
+
+    if(prev) prev.addEventListener('click', () => showAct(cur - 1));
+    if(next) next.addEventListener('click', () => showAct(cur + 1));
+    dots.forEach((d, idx) => d.addEventListener('click', () => showAct(idx)));
   })();
 
   /* Calculadora · turnos × valor → renda mensal */
