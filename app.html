@@ -4114,6 +4114,111 @@
     .cadastro-escolha .cadastro-inner > div:nth-child(2){grid-template-columns:1fr !important}
   }
 
+  /* ═══ TELA APROVADO · CONTRATANTE ════════════════════════════ */
+  .cad-aprovado-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+    align-items:start;padding-top:8px;
+  }
+  .cad-aprovado-ic{
+    width:64px;height:64px;border-radius:50%;
+    background:rgba(58,170,104,.15);border:1px solid rgba(58,170,104,.4);
+    display:flex;align-items:center;justify-content:center;
+    color:#3AAA68;
+  }
+  .cad-aprovado-h{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(48px,6vw,80px);
+    letter-spacing:2px;line-height:.92;
+    color:#fff;margin:12px 0 16px;
+  }
+  .cad-aprovado-d{
+    font-size:15px;color:rgba(255,255,255,.72);
+    line-height:1.6;margin-bottom:28px;max-width:400px;
+  }
+  .cad-aprovado-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;padding:16px 20px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .cad-aprovado-card-row{
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;color:rgba(255,255,255,.75);
+  }
+  .cad-aprovado-login-box{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;padding:36px 32px;
+    position:sticky;top:24px;
+  }
+  @media(max-width:860px){
+    .cad-aprovado-grid{grid-template-columns:1fr;gap:40px}
+    .cad-aprovado-login-box{position:static;padding:28px 20px}
+  }
+
+  /* ═══ CNPJ · CADASTRO CONTRATANTE ════════════════════════════ */
+  .cnpj-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
+  .cnpj-row .cadastro-form-input{margin-bottom:0;flex:1;font-size:17px;letter-spacing:.5px}
+  .cnpj-btn{
+    flex-shrink:0;height:56px;padding:0 20px;
+    background:#F8E2B8;color:#2C1A06;
+    border:none;border-radius:14px;
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px;
+    cursor:pointer;transition:all .15s;white-space:nowrap;
+  }
+  .cnpj-btn:hover{background:#f0d49e}
+  .cnpj-btn:disabled{opacity:.5;cursor:not-allowed}
+  .cnpj-hint{
+    font-size:12px;color:rgba(255,255,255,.42);
+    margin-top:10px;margin-bottom:24px;line-height:1.5;
+  }
+  .cnpj-loading{
+    display:none;align-items:center;gap:10px;
+    font-size:13px;color:rgba(255,255,255,.6);
+    padding:12px 0;
+  }
+  .cnpj-loading.visible{display:flex}
+  .cnpj-spinner{
+    width:18px;height:18px;border-radius:50%;flex-shrink:0;
+    border:2px solid rgba(248,226,184,.25);
+    border-top-color:#F8E2B8;
+    animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .rf-verified{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    background:rgba(58,170,104,.08);
+    border:1px solid rgba(58,170,104,.28);
+    border-radius:10px;padding:10px 14px;
+    margin-bottom:22px;
+    font-size:12px;color:rgba(255,255,255,.75);
+  }
+  .rf-cnpj{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:rgba(255,255,255,.5);
+    margin-left:2px;
+  }
+  .rf-reset{
+    margin-left:auto;background:transparent;border:none;
+    color:rgba(255,255,255,.4);cursor:pointer;
+    display:flex;align-items:center;padding:2px;
+    transition:color .15s;
+  }
+  .rf-reset:hover{color:rgba(255,255,255,.8)}
+  .rf-filled{
+    border-color:rgba(58,170,104,.3) !important;
+    background:rgba(58,170,104,.05) !important;
+  }
+  .rf-filled:focus{border-color:rgba(248,226,184,.55) !important;background:rgba(255,255,255,.07) !important}
+  .cad-section-sep{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:rgba(255,255,255,.4);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    padding-bottom:10px;margin-bottom:18px;
+  }
+
   /* ═══ AGENTE DE ATENDIMENTO ═══════════════════════════════════ */
   .agt-wrap{
     display:flex;flex-direction:column;
@@ -5234,31 +5339,29 @@ function renderCadastro(role, params){
   const cls = isEmp ? 'cadastro-emp' : 'cadastro-pro';
 
   const heading = isEmp ?
-    'COBRIMOS<br>O SEU PRÓXIMO TURNO.' :
+    'PLANEJE SEU TURNO.<br>OPERE COM PRECISÃO.' :
     'O TURNO NA<br>SUA MÃO. SEMPRE.';
 
   const lead = isEmp ?
-    'A plataforma que <b>garante o profissional</b> quando você precisar. Match IA em 2h, PIN bilateral e Pix em 15 minutos.' :
-    'A plataforma que <b>transforma seu talento em escolha real</b>. Sua agenda, seu preço, seu Cartão TURN<span class="t-i">I</span>.';
+    'Conecte sua empresa aos melhores profissionais de Hospitalidade. <b>PIN bilateral, Pix automático e operação documentada.</b>' :
+    'A plataforma que <b>transforma seu talento em escolha real</b>. Sua agenda, seu preço, sua carreira.';
 
   const items = isEmp ? [
-    {ic:'zap',           text:'<b>Match IA em 2 horas</b> · profissional certo na sua porta'},
-    {ic:'shield-check',  text:'<b>PIN bilateral</b> de check-in · geofencing 100m'},
-    {ic:'dollar-sign',   text:'<b>Pagar.me nativo</b> · pré-autorização no aceite'},
+    {ic:'zap',            text:'<b>Match inteligente</b> · profissional certo para cada turno'},
+    {ic:'shield-check',   text:'<b>PIN bilateral</b> de check-in · geofencing 100m'},
+    {ic:'dollar-sign',    text:'<b>Pagar.me nativo</b> · pré-autorização no aceite'},
     {ic:'clipboard-check',text:'<b>Checklist Core FHP</b> · 40+ funções com tarefas prontas'}
   ] : [
     {ic:'calendar-check',text:'<b>Sua agenda, suas regras</b> · trabalhe quando, onde, por quanto'},
     {ic:'zap',           text:'<b>Pix em 15 minutos</b> · check-out validado, dinheiro na conta'},
     {ic:'award',         text:'<b>Score recíproco</b> · histórico que abre portas'},
-    {ic:'credit-card',   text:'<b>Cartão TURN<span class="t-i">I</span></b> · descontos em redes conveniadas'}
+    {ic:'trending-up',   text:'<b>Carreira de verdade</b> · você é a sua própria empresa'}
   ];
 
-  const formH = isEmp ?
-    'Comece grátis,<br>em 2 minutos.' :
-    'Cadastre-se grátis,<br>em 3 minutos.';
+  const formH = isEmp ? 'Cadastro da empresa.' : 'Cadastre-se grátis,<br>em 3 minutos.';
   const formD = isEmp ?
-    'Vou te enviar o link de acesso. <b>Sem contrato</b> · só pague quando o profissional fizer check-in no seu plantão.' :
-    'Vou te enviar o link de acesso. Cadastro com <b>MEI</b> · contrato B2B PJ↔PJ · sem vínculo trabalhista.';
+    'Informe o CNPJ e os dados da empresa são preenchidos automaticamente.' :
+    'Cadastro com <b>MEI</b> · contrato B2B PJ↔PJ · sem vínculo trabalhista.';
 
   const I = '<span class="di">I</span>';
   const dot = '<span class="de">.</span>';
@@ -5286,60 +5389,148 @@ function renderCadastro(role, params){
             </div>
           </div>
 
-          <form class="cadastro-form-wrap" id="cadastroForm" data-cad-step="1" onsubmit="return cadastroSubmit(event,'${role}')">
-            <div class="cadastro-form-tag"><span class="live-dot"></span>pré-cadastro · 2 minutos</div>
+          <form class="cadastro-form-wrap" id="cadastroForm" onsubmit="return cadastroSubmit(event,'${role}')">
+            <div class="cadastro-form-tag"><span class="live-dot"></span>${isEmp ? 'cadastro · empresa' : 'cadastro · profissional'}</div>
             <h2 class="cadastro-form-h">${formH}</h2>
             <p class="cadastro-form-d">${formD}</p>
 
-            <!-- Wizard bar mobile-only -->
-            <div class="cad-wiz-bar" id="cadWizBar">
-              <span id="cadWizLabel">Passo 1 de 2 · Identificação</span>
-              <div class="cad-wiz-bar-track"><div class="cad-wiz-bar-fill"></div></div>
-            </div>
-
             ${isEmp ? `
-              <!-- STEP 1 · Identificação · mobile -->
-              <div class="cad-step cad-step-1 cad-step-active">
-                <label class="cadastro-form-label" for="f_nome">Seu nome (responsável)</label>
+              <!-- ═══ PASSO 1 · CNPJ ═══ -->
+              <div id="cnpjStep">
+                <label class="cadastro-form-label" for="f_cnpj">
+                  <span style="display:inline-flex;align-items:center;gap:6px">
+                    CNPJ da empresa
+                    <span style="font-size:9px;background:rgba(248,226,184,.15);border:1px solid rgba(248,226,184,.3);color:#F8E2B8;padding:2px 7px;border-radius:999px;letter-spacing:1px">RECEITA FEDERAL</span>
+                  </span>
+                </label>
+                <div class="cnpj-row">
+                  <input type="text" id="f_cnpj" class="cadastro-form-input" placeholder="00.000.000/0000-00" maxlength="18" inputmode="numeric" oninput="cnpjMask(this)" onkeydown="if(event.key==='Enter'){event.preventDefault();consultarCNPJ()}">
+                  <button type="button" class="cnpj-btn" id="cnpjBtn" onclick="consultarCNPJ()">
+                    <i data-lucide="search" style="width:15px;height:15px"></i> Consultar
+                  </button>
+                </div>
+                <div class="cnpj-loading" id="cnpjLoading">
+                  <div class="cnpj-spinner"></div>
+                  <span>Consultando Receita Federal...</span>
+                </div>
+                <div class="cnpj-hint">Após a consulta, os dados da empresa são preenchidos automaticamente.</div>
+              </div>
+
+              <!-- ═══ PASSO 2 · DADOS PREENCHIDOS ═══ -->
+              <div id="dadosStep" style="display:none">
+                <!-- Badge verificado -->
+                <div class="rf-verified" id="rfBadge">
+                  <i data-lucide="shield-check" style="width:15px;height:15px;color:#3AAA68"></i>
+                  <span>Dados verificados · Receita Federal</span>
+                  <span class="rf-cnpj" id="rfCnpjDisplay"></span>
+                  <button type="button" class="rf-reset" onclick="resetCNPJ()" title="Alterar CNPJ"><i data-lucide="refresh-cw" style="width:12px;height:12px"></i></button>
+                </div>
+
+                <!-- Empresa -->
+                <div class="cad-section-sep">Dados da empresa</div>
+
+                <label class="cadastro-form-label" for="f_razao">Razão Social</label>
+                <input type="text" required id="f_razao" class="cadastro-form-input rf-filled" placeholder="Razão Social">
+
+                <label class="cadastro-form-label" for="f_estab">Nome Fantasia</label>
+                <input type="text" required id="f_estab" class="cadastro-form-input rf-filled" placeholder="Nome Fantasia">
+
+                <label class="cadastro-form-label" for="f_tipo">Tipo de estabelecimento</label>
+                <select required id="f_tipo" class="cadastro-form-input rf-filled">
+                  <option value="">selecione</option>
+                  <option>Bar</option>
+                  <option>Restaurante</option>
+                  <option>Hotel</option>
+                  <option>Catering</option>
+                  <option>Eventos</option>
+                  <option>Cozinha industrial</option>
+                  <option>Outros</option>
+                </select>
+
+                <label class="cadastro-form-label" for="f_endereco">Endereço</label>
+                <input type="text" required id="f_endereco" class="cadastro-form-input rf-filled" placeholder="Logradouro, número · Bairro · Cidade/UF · CEP">
+
+                <!-- Responsável -->
+                <div class="cad-section-sep" style="margin-top:28px">Responsável pelo cadastro</div>
+
+                <label class="cadastro-form-label" for="f_nome">Nome completo</label>
                 <input type="text" required id="f_nome" class="cadastro-form-input" placeholder="ex: Felipe Zanutto" autocomplete="name">
 
-                <div class="cadastro-form-row">
-                  <div>
-                    <label class="cadastro-form-label" for="f_email">E-mail</label>
-                    <input type="email" required id="f_email" class="cadastro-form-input" placeholder="seu@email.com.br" autocomplete="email">
-                  </div>
-                  <div>
-                    <label class="cadastro-form-label" for="f_wpp">WhatsApp</label>
-                    <input type="tel" required id="f_wpp" class="cadastro-form-input" placeholder="(11) 9XXXX-XXXX" autocomplete="tel">
-                  </div>
+                <label class="cadastro-form-label" for="f_cargo">Cargo</label>
+                <input type="text" required id="f_cargo" class="cadastro-form-input" placeholder="ex: Gerente, Sócio, COO" autocomplete="organization-title">
+
+                <label class="cadastro-form-label" for="f_email">E-mail corporativo</label>
+                <input type="email" required id="f_email" class="cadastro-form-input" placeholder="voce@empresa.com.br" autocomplete="email">
+
+                <label class="cadastro-form-label" for="f_tel">Telefone</label>
+                <input type="tel" id="f_tel" class="cadastro-form-input" placeholder="(11) 3XXX-XXXX" autocomplete="tel">
+
+                <label class="cadastro-form-label" for="f_wpp">WhatsApp / Celular</label>
+                <input type="tel" required id="f_wpp" class="cadastro-form-input" placeholder="(11) 9XXXX-XXXX" autocomplete="tel">
+
+                <button type="submit" class="cadastro-form-cta" style="margin-top:8px">
+                  Criar conta <i data-lucide="arrow-right"></i>
+                </button>
+                <div class="cadastro-form-foot">
+                  <span>Ao cadastrar você concorda com os <a href="#">Termos de uso</a> e a <a href="#">Política de privacidade</a>.</span>
                 </div>
               </div>
 
-              <!-- STEP 2 · Contexto · mobile -->
-              <div class="cad-step cad-step-2">
-                <label class="cadastro-form-label" for="f_estab">Nome do estabelecimento</label>
-                <input type="text" required id="f_estab" class="cadastro-form-input" placeholder="ex: A Pizza da Mooca" autocomplete="organization">
-
-                <div class="cadastro-form-row">
-                  <div>
-                    <label class="cadastro-form-label" for="f_tipo">Tipo de operação</label>
-                    <select required id="f_tipo" class="cadastro-form-input">
-                      <option value="">selecione</option>
-                      <option>Bar</option>
-                      <option>Restaurante</option>
-                      <option>Hotel</option>
-                      <option>Catering</option>
-                      <option>Eventos</option>
-                      <option>Cozinha industrial</option>
-                      <option>Outros</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="cadastro-form-label" for="f_cidade">Cidade</label>
-                    <input type="text" required id="f_cidade" class="cadastro-form-input" placeholder="ex: São Paulo" autocomplete="address-level2">
-                  </div>
-                </div>
-              </div>
+              <script>
+              function cnpjMask(el){
+                let v=el.value.replace(/\D/g,'').slice(0,14);
+                if(v.length>12) v=v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2}).*/,'$1.$2.$3/$4-$5');
+                else if(v.length>8) v=v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4}).*/,'$1.$2.$3/$4');
+                else if(v.length>5) v=v.replace(/^(\d{2})(\d{3})(\d{0,3}).*/,'$1.$2.$3');
+                else if(v.length>2) v=v.replace(/^(\d{2})(\d{0,3}).*/,'$1.$2');
+                el.value=v;
+              }
+              function consultarCNPJ(){
+                const raw=document.getElementById('f_cnpj').value.replace(/\D/g,'');
+                if(raw.length<14){
+                  document.getElementById('f_cnpj').style.borderColor='#E84545';
+                  document.getElementById('f_cnpj').focus();
+                  setTimeout(()=>document.getElementById('f_cnpj').style.borderColor='',1800);
+                  return;
+                }
+                document.getElementById('cnpjBtn').disabled=true;
+                document.getElementById('cnpjLoading').classList.add('visible');
+                // Simula latência da API (demo)
+                setTimeout(()=>{
+                  const fmt=raw.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,'$1.$2.$3/$4-$5');
+                  // Demo data · em produção: GET https://open.cnpja.com/office/{cnpj}
+                  const tipos=['Restaurante','Bar','Hotel','Catering','Restaurante','Restaurante'];
+                  const tipoIdx=parseInt(raw[raw.length-1])%tipos.length;
+                  const razoes=['GASTRONOMIA PREMIUM OPERAÇÕES LTDA','HOSPITALIDADE E SERVIÇOS LTDA','GRUPO ALIMENTAR OPERAÇÕES LTDA','RESTAURANTE E EVENTOS LTDA'];
+                  const razao=razoes[parseInt(raw[0])%razoes.length];
+                  const bairros=['Mooca','Itaim Bibi','Pinheiros','Vila Olímpia','Jardins','Liberdade'];
+                  const bairro=bairros[parseInt(raw[raw.length-2])%bairros.length];
+                  const data={
+                    razaoSocial: razao,
+                    nomeFantasia: '',
+                    tipo: tipos[tipoIdx],
+                    endereco: 'Av. Paulista, '+Math.floor(100+parseInt(raw.slice(0,3)))+'  · '+bairro+' · São Paulo/SP · CEP '+raw.slice(0,5)+'-'+raw.slice(5,8)
+                  };
+                  document.getElementById('f_razao').value=data.razaoSocial;
+                  document.getElementById('f_estab').value=data.nomeFantasia;
+                  document.getElementById('f_tipo').value=data.tipo;
+                  document.getElementById('f_endereco').value=data.endereco;
+                  document.getElementById('rfCnpjDisplay').textContent=fmt;
+                  document.getElementById('cnpjLoading').classList.remove('visible');
+                  document.getElementById('cnpjStep').style.display='none';
+                  const ds=document.getElementById('dadosStep');
+                  ds.style.display='block';
+                  ds.style.animation='cad-fade .3s ease-out';
+                  if(typeof refreshIcons==='function') refreshIcons();
+                  ds.querySelector('#f_nome').focus();
+                }, 1800);
+              }
+              function resetCNPJ(){
+                document.getElementById('dadosStep').style.display='none';
+                document.getElementById('cnpjStep').style.display='block';
+                document.getElementById('cnpjBtn').disabled=false;
+              }
+              <\/script>
             ` : `
               <!-- STEP 1 · Identificação · mobile -->
               <div class="cad-step cad-step-1 cad-step-active">
@@ -5476,52 +5667,112 @@ function cadastroSubmit(e, role){
     const subtitle = isEmp ?
       'Sua empresa já tem acesso. Publique seu primeiro turno agora.' :
       'Em até <b>24 horas</b> você recebe um e-mail com o link pra configurar seu perfil e ver os primeiros turnos.';
-    document.getElementById('app').innerHTML = `
-      <div class="cadastro ${isEmp?'cadastro-emp':'cadastro-pro'}">
+    document.getElementById('app').innerHTML = isEmp ? `
+      <div class="cadastro cadastro-emp">
+        <div class="cadastro-inner" style="max-width:980px">
+          <header class="cadastro-head">
+            <div class="cadastro-logo" onclick="window.location.href='index.html'">TURN${I}<span class="de">.</span></div>
+          </header>
+
+          <div class="cad-aprovado-grid">
+
+            <!-- COLUNA ESQUERDA · confirmação -->
+            <div class="cad-aprovado-left">
+              <div class="cad-aprovado-ic"><i data-lucide="circle-check-big" style="width:36px;height:36px"></i></div>
+              <div class="cadastro-form-tag" style="display:inline-flex;margin-top:20px"><span class="live-dot"></span>cadastro aprovado</div>
+              <h1 class="cad-aprovado-h">CADASTRO<br>APROVADO.</h1>
+              <p class="cad-aprovado-d">Sua empresa já tem acesso à plataforma TURNI. Publique o primeiro turno em menos de 5 minutos.</p>
+
+              <div class="cad-aprovado-card">
+                <div class="cad-aprovado-card-row">
+                  <i data-lucide="building-2" style="width:14px;height:14px;color:#F8E2B8;flex-shrink:0"></i>
+                  <span>${escapeHtml(data.estabelecimento||data.nome)}</span>
+                </div>
+                <div class="cad-aprovado-card-row">
+                  <i data-lucide="user" style="width:14px;height:14px;color:#F8E2B8;flex-shrink:0"></i>
+                  <span>${escapeHtml(data.nome)}</span>
+                </div>
+                <div class="cad-aprovado-card-row">
+                  <i data-lucide="mail" style="width:14px;height:14px;color:#F8E2B8;flex-shrink:0"></i>
+                  <span>${escapeHtml(data.email)}</span>
+                </div>
+              </div>
+
+              <div class="cad-stepper" style="margin-top:32px">
+                <div class="cad-step done">
+                  <div class="cad-step-ic"><i data-lucide="check"></i></div>
+                  <div class="cad-step-info">
+                    <div class="cad-step-num">01</div>
+                    <div class="cad-step-h">Cadastro da empresa</div>
+                    <div class="cad-step-d">CNPJ verificado · Receita Federal</div>
+                  </div>
+                </div>
+                <div class="cad-step done">
+                  <div class="cad-step-ic"><i data-lucide="check"></i></div>
+                  <div class="cad-step-info">
+                    <div class="cad-step-num">02</div>
+                    <div class="cad-step-h">Acesso liberado</div>
+                    <div class="cad-step-d">Aprovação instantânea · sem espera</div>
+                  </div>
+                </div>
+                <div class="cad-step active">
+                  <div class="cad-step-ic"><i data-lucide="briefcase"></i></div>
+                  <div class="cad-step-info">
+                    <div class="cad-step-num">03</div>
+                    <div class="cad-step-h">Primeiro turno publicado</div>
+                    <div class="cad-step-d">Acesse e publique agora</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUNA DIREITA · login imediato -->
+            <div class="cad-aprovado-right">
+              <div class="cad-aprovado-login-box">
+                <div class="cadastro-form-tag" style="display:inline-flex;margin-bottom:16px"><span class="live-dot"></span>acesso imediato</div>
+                <h3 style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:#fff;margin-bottom:6px;line-height:1">Entre na plataforma</h3>
+                <p style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px;line-height:1.5">Use o e-mail e senha cadastrados para acessar agora.</p>
+
+                <label class="cadastro-form-label" for="al_email">E-mail</label>
+                <input type="email" id="al_email" class="cadastro-form-input" value="${escapeHtml(data.email)}" placeholder="seu@empresa.com.br" autocomplete="email">
+
+                <label class="cadastro-form-label" for="al_senha">Senha</label>
+                <div style="position:relative">
+                  <input type="password" id="al_senha" class="cadastro-form-input" placeholder="sua senha" autocomplete="current-password" style="padding-right:48px">
+                  <button type="button" onclick="const i=document.getElementById('al_senha');i.type=i.type==='password'?'text':'password'" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;display:flex;align-items:center"><i data-lucide="eye" style="width:16px;height:16px"></i></button>
+                </div>
+
+                <button type="button" class="cadastro-form-cta" style="background:#F8E2B8;color:#2C1A06;margin-top:4px"
+                  onclick="Session.login(document.getElementById('al_email').value, document.getElementById('al_senha').value||'demo'); route()">
+                  Entrar na plataforma <i data-lucide="arrow-right"></i>
+                </button>
+
+                <div style="text-align:center;margin-top:20px">
+                  <span style="font-size:12px;color:rgba(255,255,255,.35)">ou acesse via demo</span>
+                </div>
+                <a class="cadastro-form-cta" href="#/login?hint=emp" style="background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);margin-top:10px;font-size:13px">
+                  <i data-lucide="users" style="width:14px;height:14px"></i> Ver personas de demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ` : `
+      <div class="cadastro cadastro-pro">
         <div class="cadastro-inner" style="max-width:760px">
           <header class="cadastro-head">
             <div class="cadastro-logo" onclick="window.location.href='index.html'">TURN${I}<span class="de">.</span></div>
             <a class="cadastro-back" href="#/login">Já tem conta? entrar <i data-lucide="arrow-right"></i></a>
           </header>
           <div class="cadastro-success" style="text-align:center;max-width:560px;margin:0 auto">
-            <div class="cadastro-success-ic"><i data-lucide="${isEmp?'building-2':'check'}"></i></div>
-            <div class="cadastro-form-tag" style="justify-content:center;display:inline-flex"><span class="live-dot"></span>${isEmp?'acesso liberado':'cadastro recebido'}</div>
-            <h2 class="cadastro-success-h" style="font-size:48px;line-height:1">${isEmp?'ACESSO<br>LIBERADO.':'PRÉ-CADASTRO<br>RECEBIDO.'}</h2>
+            <div class="cadastro-success-ic"><i data-lucide="check"></i></div>
+            <div class="cadastro-form-tag" style="justify-content:center;display:inline-flex"><span class="live-dot"></span>cadastro recebido</div>
+            <h2 class="cadastro-success-h" style="font-size:48px;line-height:1">PRÉ-CADASTRO<br>RECEBIDO.</h2>
             <p class="cadastro-success-d" style="margin-top:18px">${subtitle}</p>
-
-            <div class="cad-stepper">
-              <div class="cad-step done">
-                <div class="cad-step-ic"><i data-lucide="check"></i></div>
-                <div class="cad-step-info">
-                  <div class="cad-step-num">01</div>
-                  <div class="cad-step-h">Cadastro recebido</div>
-                  <div class="cad-step-d">${escapeHtml(data.email)}</div>
-                </div>
-              </div>
-              <div class="cad-step ${isEmp?'done':'active'}">
-                <div class="cad-step-ic"><i data-lucide="${isEmp?'check':'clock'}"></i></div>
-                <div class="cad-step-info">
-                  <div class="cad-step-num">02</div>
-                  <div class="cad-step-h">${isEmp?'Acesso liberado':'Revisão da equipe Turn'+I}</div>
-                  <div class="cad-step-d">${isEmp?'Acesso imediato à plataforma':'SLA de até 24 horas'}</div>
-                </div>
-              </div>
-              <div class="cad-step ${isEmp?'active':''}">
-                <div class="cad-step-ic"><i data-lucide="${isEmp?'briefcase':'user-check'}"></i></div>
-                <div class="cad-step-info">
-                  <div class="cad-step-num">03</div>
-                  <div class="cad-step-h">${isEmp?'Primeiro turno publicado':'Configuração do perfil'}</div>
-                  <div class="cad-step-d">${isEmp?'Publique em menos de 5 minutos':'Link mágico chega no seu e-mail'}</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
-              ${isEmp
-                ? `<a class="cadastro-form-cta" href="#/login?hint=emp" style="background:#F8E2B8;color:#2C1A06">Acessar a plataforma <i data-lucide="arrow-right"></i></a>`
-                : `<a class="cadastro-form-cta" href="index.html" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff">Voltar para a Turn${I}</a>
-                   <a class="cadastro-form-cta" href="#/login?hint=wkr">Demo · entrar como persona <i data-lucide="arrow-right"></i></a>`
-              }
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+              <a class="cadastro-form-cta" href="index.html" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff">Voltar para a Turn${I}</a>
+              <a class="cadastro-form-cta" href="#/login?hint=wkr">Demo · entrar como persona <i data-lucide="arrow-right"></i></a>
             </div>
           </div>
         </div>
