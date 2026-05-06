@@ -4113,6 +4113,126 @@
     .cadastro-form-wrap{padding:32px 24px}
     .cadastro-escolha .cadastro-inner > div:nth-child(2){grid-template-columns:1fr !important}
   }
+
+  /* ═══ AGENTE DE ATENDIMENTO ═══════════════════════════════════ */
+  .agt-wrap{
+    display:flex;flex-direction:column;
+    height:calc(100vh - 56px);
+    max-width:720px;margin:0 auto;
+    padding:24px 24px 0;
+    gap:0;
+  }
+  .agt-header{
+    display:flex;align-items:center;gap:14px;
+    padding:18px 22px;
+    background:var(--s2);
+    border:1px solid var(--b1);
+    border-radius:16px 16px 0 0;
+    flex-shrink:0;
+  }
+  .agt-header-av{
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(248,226,184,.18);
+    border:1px solid rgba(248,226,184,.35);
+    display:flex;align-items:center;justify-content:center;
+    color:#F8E2B8;flex-shrink:0;
+  }
+  .agt-header-name{font-size:14px;font-weight:600;color:var(--t-primary)}
+  .agt-header-status{font-size:12px;color:var(--t-tertiary);display:flex;align-items:center;gap:6px;margin-top:2px}
+  .agt-header-badge{
+    margin-left:auto;
+    font-family:var(--M);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:rgba(248,226,184,.7);
+    background:rgba(248,226,184,.08);
+    border:1px solid rgba(248,226,184,.2);
+    padding:4px 10px;border-radius:999px;
+  }
+  .agt-chat{
+    flex:1;overflow-y:auto;
+    padding:20px 22px;
+    background:var(--s1);
+    border-left:1px solid var(--b1);
+    border-right:1px solid var(--b1);
+    display:flex;flex-direction:column;gap:10px;
+    scroll-behavior:smooth;
+  }
+  .agt-bubble{display:flex;align-items:flex-start;gap:10px;animation:agt-in .2s ease-out}
+  @keyframes agt-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .agt-avatar{
+    width:26px;height:26px;border-radius:50%;
+    background:rgba(248,226,184,.15);border:1px solid rgba(248,226,184,.3);
+    display:flex;align-items:center;justify-content:center;
+    color:#F8E2B8;flex-shrink:0;margin-top:2px;
+  }
+  .agt-text{
+    font-size:14px;line-height:1.6;color:var(--t-secondary);
+    background:var(--s2);border:1px solid var(--b1);
+    border-radius:0 14px 14px 14px;
+    padding:11px 15px;max-width:88%;
+  }
+  .agt-user{flex-direction:row-reverse}
+  .agt-user .agt-text{
+    background:rgba(248,226,184,.12);
+    border-color:rgba(248,226,184,.25);
+    border-radius:14px 0 14px 14px;
+    color:var(--t-primary);
+    margin-left:auto;
+  }
+  .agt-quick{
+    display:flex;flex-wrap:wrap;gap:8px;
+    padding:4px 0 8px 36px;
+  }
+  .agt-quick-btn{
+    font-size:13px;font-family:inherit;
+    color:#F8E2B8;
+    background:rgba(248,226,184,.08);
+    border:1px solid rgba(248,226,184,.28);
+    border-radius:999px;
+    padding:7px 14px;cursor:pointer;
+    transition:all .15s;white-space:nowrap;
+  }
+  .agt-quick-btn:hover{background:rgba(248,226,184,.18);border-color:rgba(248,226,184,.5)}
+  .agt-dots{display:inline-flex;gap:4px;align-items:center;padding:2px 0}
+  .agt-dots span{
+    width:6px;height:6px;border-radius:50%;
+    background:rgba(255,255,255,.4);
+    animation:agt-dot 1.2s ease infinite;
+  }
+  .agt-dots span:nth-child(2){animation-delay:.2s}
+  .agt-dots span:nth-child(3){animation-delay:.4s}
+  @keyframes agt-dot{0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.3);opacity:1}}
+  .agt-input-wrap{
+    display:flex;gap:10px;align-items:center;
+    padding:14px 16px;
+    background:var(--s2);
+    border:1px solid var(--b1);
+    border-top:none;
+    border-radius:0 0 16px 16px;
+    flex-shrink:0;
+    margin-bottom:24px;
+  }
+  .agt-input{
+    flex:1;background:var(--s1);border:1px solid var(--b1);
+    border-radius:999px;padding:10px 18px;
+    font-family:inherit;font-size:14px;color:var(--t-primary);
+    outline:none;transition:border-color .15s;
+  }
+  .agt-input:focus{border-color:rgba(248,226,184,.45)}
+  .agt-input::placeholder{color:var(--t-tertiary)}
+  .agt-send{
+    width:38px;height:38px;border-radius:50%;border:none;
+    background:#F8E2B8;color:#2C1A06;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;transition:transform .12s;
+  }
+  .agt-send:hover{transform:scale(1.07)}
+  @media(max-width:680px){
+    .agt-wrap{padding:12px 12px 0}
+    .agt-header{padding:14px 16px}
+    .agt-header-badge{display:none}
+    .agt-chat{padding:16px 14px}
+    .agt-quick{padding-left:0}
+  }
 </style>
 </head>
 <body>
@@ -4596,6 +4716,7 @@ function route(){
   if(path === '/contratante/equipe') return renderEmpEquipe(params);
   if(path === '/contratante/pagamentos') return renderEmpFinanceiro(params); // legacy
   if(path === '/contratante/financeiro') return renderEmpFinanceiro(params);
+  if(path === '/contratante/atendimento') return renderEmpAtendimento(params);
   if(path === '/profissional') return renderProDashboard(params);
   if(path === '/profissional/feed') return renderProFeed(params);
   if(path === '/profissional/vaga') return renderProVagaDetalhe(params);
@@ -5353,8 +5474,8 @@ function cadastroSubmit(e, role){
     const isEmp = role === 'emp';
     const I = '<span class="di">I</span>';
     const subtitle = isEmp ?
-      'Em até <b>24 horas</b> você recebe um e-mail com o link pra configurar sua conta e publicar o primeiro turno.' :
-      'Em até <b>24 horas</b> você recebe um e-mail com o link pra configurar seu perfil e ver os primeiros plantões.';
+      'Sua empresa já tem acesso. Publique seu primeiro turno agora.' :
+      'Em até <b>24 horas</b> você recebe um e-mail com o link pra configurar seu perfil e ver os primeiros turnos.';
     document.getElementById('app').innerHTML = `
       <div class="cadastro ${isEmp?'cadastro-emp':'cadastro-pro'}">
         <div class="cadastro-inner" style="max-width:760px">
@@ -5363,9 +5484,9 @@ function cadastroSubmit(e, role){
             <a class="cadastro-back" href="#/login">Já tem conta? entrar <i data-lucide="arrow-right"></i></a>
           </header>
           <div class="cadastro-success" style="text-align:center;max-width:560px;margin:0 auto">
-            <div class="cadastro-success-ic"><i data-lucide="check"></i></div>
-            <div class="cadastro-form-tag" style="justify-content:center;display:inline-flex"><span class="live-dot"></span>pré-cadastro recebido</div>
-            <h2 class="cadastro-success-h" style="font-size:48px;line-height:1">PRÉ-CADASTRO<br>RECEBIDO.</h2>
+            <div class="cadastro-success-ic"><i data-lucide="${isEmp?'building-2':'check'}"></i></div>
+            <div class="cadastro-form-tag" style="justify-content:center;display:inline-flex"><span class="live-dot"></span>${isEmp?'acesso liberado':'cadastro recebido'}</div>
+            <h2 class="cadastro-success-h" style="font-size:48px;line-height:1">${isEmp?'ACESSO<br>LIBERADO.':'PRÉ-CADASTRO<br>RECEBIDO.'}</h2>
             <p class="cadastro-success-d" style="margin-top:18px">${subtitle}</p>
 
             <div class="cad-stepper">
@@ -5373,31 +5494,34 @@ function cadastroSubmit(e, role){
                 <div class="cad-step-ic"><i data-lucide="check"></i></div>
                 <div class="cad-step-info">
                   <div class="cad-step-num">01</div>
-                  <div class="cad-step-h">Pré-cadastro recebido</div>
+                  <div class="cad-step-h">Cadastro recebido</div>
                   <div class="cad-step-d">${escapeHtml(data.email)}</div>
                 </div>
               </div>
-              <div class="cad-step active">
-                <div class="cad-step-ic"><i data-lucide="clock"></i></div>
+              <div class="cad-step ${isEmp?'done':'active'}">
+                <div class="cad-step-ic"><i data-lucide="${isEmp?'check':'clock'}"></i></div>
                 <div class="cad-step-info">
                   <div class="cad-step-num">02</div>
-                  <div class="cad-step-h">Revisão da equipe Turn${I}</div>
-                  <div class="cad-step-d">SLA de até 24 horas</div>
+                  <div class="cad-step-h">${isEmp?'Acesso liberado':'Revisão da equipe Turn'+I}</div>
+                  <div class="cad-step-d">${isEmp?'Acesso imediato à plataforma':'SLA de até 24 horas'}</div>
                 </div>
               </div>
-              <div class="cad-step">
-                <div class="cad-step-ic"><i data-lucide="user-check"></i></div>
+              <div class="cad-step ${isEmp?'active':''}">
+                <div class="cad-step-ic"><i data-lucide="${isEmp?'briefcase':'user-check'}"></i></div>
                 <div class="cad-step-info">
                   <div class="cad-step-num">03</div>
-                  <div class="cad-step-h">Configuração completa do perfil</div>
-                  <div class="cad-step-d">Link mágico chega no seu e-mail</div>
+                  <div class="cad-step-h">${isEmp?'Primeiro turno publicado':'Configuração do perfil'}</div>
+                  <div class="cad-step-d">${isEmp?'Publique em menos de 5 minutos':'Link mágico chega no seu e-mail'}</div>
                 </div>
               </div>
             </div>
 
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
-              <a class="cadastro-form-cta" href="index.html" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff">Voltar para a Turn${I}</a>
-              <a class="cadastro-form-cta" href="#/login?hint=${isEmp?'emp':'wkr'}">Demo · entrar como persona <i data-lucide="arrow-right"></i></a>
+              ${isEmp
+                ? `<a class="cadastro-form-cta" href="#/login?hint=emp" style="background:#F8E2B8;color:#2C1A06">Acessar a plataforma <i data-lucide="arrow-right"></i></a>`
+                : `<a class="cadastro-form-cta" href="index.html" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff">Voltar para a Turn${I}</a>
+                   <a class="cadastro-form-cta" href="#/login?hint=wkr">Demo · entrar como persona <i data-lucide="arrow-right"></i></a>`
+              }
             </div>
           </div>
         </div>
@@ -6518,6 +6642,218 @@ function getActionBanner(u){
   return '';
 }
 
+// ── AGENTE DE ATENDIMENTO · CONTRATANTE ────────────────────────
+function renderEmpAtendimento(){
+  const u = Session.user();
+  const nav = getEmpNav('atendimento');
+
+  const SCRIPTS = {
+    welcome: {
+      msgs: [
+        `Olá, <b>${escapeHtml(u.nome?.split(' ')[0]||'')}</b>! Sou o assistente virtual da <b>TURNI.</b> 👋`,
+        `Estou aqui para te ajudar a entender como a plataforma funciona, comparar planos e tirar dúvidas — antes de você falar com nosso time comercial.`,
+        `Por onde quer começar?`
+      ],
+      quick: [
+        {id:'como-funciona', label:'Como funciona a plataforma?'},
+        {id:'planos',        label:'Quero ver os planos'},
+        {id:'custo',         label:'Qual o custo por turno?'},
+        {id:'match',         label:'Como é o match com profissionais?'},
+        {id:'consultor',     label:'Falar com um consultor'}
+      ]
+    },
+    'como-funciona': {
+      msgs: [
+        `A TURNI. é a plataforma do turno para Hospitalidade. O fluxo é simples:`,
+        `<b>1.</b> Você publica a vaga com briefing, função, horário e valor/hora.<br><b>2.</b> Profissionais qualificados com score verificado se candidatam.<br><b>3.</b> Você aceita, o profissional faz check-in via PIN bilateral.<br><b>4.</b> Ao final do turno, o pagamento é processado via Pix automaticamente.`,
+        `Tudo dentro da plataforma. Sem WhatsApp, sem agência, sem surpresa.`
+      ],
+      quick: [
+        {id:'planos',     label:'Quero ver os planos'},
+        {id:'custo',      label:'Qual o custo por turno?'},
+        {id:'consultor',  label:'Falar com um consultor'}
+      ]
+    },
+    planos: {
+      msgs: [
+        `Atualmente temos dois caminhos para empresas:`,
+        `<div style="display:grid;gap:12px;margin-top:4px">
+          <div style="border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:16px 18px;background:rgba(255,255,255,.04)">
+            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Plano atual</div>
+            <div style="font-size:18px;font-weight:700;color:#F8E2B8;margin-bottom:4px">Acesso TURNI.</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.5">Publica turnos · recebe candidatos · PIN bilateral · Pix automático · sem mensalidade fixa</div>
+            <div style="margin-top:10px;font-size:12px;color:#9DD9B0;font-weight:600">✓ Disponível agora</div>
+          </div>
+          <div style="border:1px solid rgba(248,226,184,.3);border-radius:12px;padding:16px 18px;background:rgba(248,226,184,.06)">
+            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Em breve</div>
+            <div style="font-size:18px;font-weight:700;color:#F8E2B8;margin-bottom:4px">TURNI. Pro</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.5">Dashboard avançado · match prioritário · relatórios de operação · multi-unidade · integração PDV</div>
+            <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.4);font-weight:600">⏳ Lista de espera aberta</div>
+          </div>
+        </div>`
+      ],
+      quick: [
+        {id:'custo',        label:'Qual o custo por turno?'},
+        {id:'lista-espera', label:'Entrar na lista do TURNI. Pro'},
+        {id:'consultor',    label:'Falar com um consultor'}
+      ]
+    },
+    custo: {
+      msgs: [
+        `O modelo é simples e transparente:`,
+        `<b>Você define o valor/hora</b> na vaga — o profissional vê antes de se candidatar.<br><br>A TURNI. aplica uma <b>taxa de serviço</b> sobre o valor total do turno, processada automaticamente via Pagar.me.<br><br>Sem mensalidade, sem taxa de cadastro, sem custo até o primeiro turno ser concluído.`,
+        `Quer saber o valor exato da taxa e simular o custo do seu turno?`
+      ],
+      quick: [
+        {id:'simular',    label:'Simular custo de um turno'},
+        {id:'planos',     label:'Ver comparativo de planos'},
+        {id:'consultor',  label:'Falar com um consultor'}
+      ]
+    },
+    match: {
+      msgs: [
+        `O match na TURNI. é baseado em <b>score, função, localização e disponibilidade</b>.`,
+        `Quando você publica um turno, o algoritmo ordena os profissionais mais compatíveis. Você vê o perfil, avaliações e histórico de cada um antes de aceitar.<br><br>O profissional aceito recebe o briefing completo da sua operação automaticamente — chega sabendo exatamente o que esperar.`,
+        `Nenhuma surpresa de lado a lado.`
+      ],
+      quick: [
+        {id:'planos',     label:'Ver os planos'},
+        {id:'custo',      label:'Qual o custo por turno?'},
+        {id:'consultor',  label:'Falar com um consultor'}
+      ]
+    },
+    simular: {
+      msgs: [
+        `Para simular, acesse a aba <b>Vagas</b> e clique em <b>Nova Vaga</b>. O formulário mostra o custo estimado em tempo real conforme você preenche valor/hora e duração.`,
+        `Quer que eu te leve até lá?`
+      ],
+      quick: [
+        {id:'ir-vagas',   label:'Ir para Vagas'},
+        {id:'consultor',  label:'Prefiro falar com um consultor'}
+      ]
+    },
+    'lista-espera': {
+      msgs: [
+        `Ótimo! Vou registrar seu interesse no <b>TURNI. Pro</b>.`,
+        `Um consultor vai entrar em contato com você em até <b>2 horas úteis</b> para apresentar o plano e condições de early access. Fique de olho no seu e-mail: <b>${escapeHtml(u.email||'')}</b>`
+      ],
+      quick: [
+        {id:'como-funciona', label:'Enquanto isso, como funciona?'},
+        {id:'ir-vagas',      label:'Quero publicar meu primeiro turno'}
+      ]
+    },
+    consultor: {
+      msgs: [
+        `Perfeito! Vou acionar o time comercial da TURNI. para você.`,
+        `Um consultor vai entrar em contato em até <b>2 horas úteis</b> pelo e-mail <b>${escapeHtml(u.email||'')}</b> ou WhatsApp cadastrado.<br><br>Se preferir, você já pode usar a plataforma agora — publique seu primeiro turno em menos de 5 minutos.`
+      ],
+      quick: [
+        {id:'ir-vagas',      label:'Publicar meu primeiro turno'},
+        {id:'como-funciona', label:'Entender mais antes'}
+      ]
+    },
+    'ir-vagas': {
+      msgs: [`Te levando para Vagas agora...`],
+      quick: [],
+      redirect: '#/contratante/vagas'
+    }
+  };
+
+  function buildBubbles(msgs, isAgent){
+    return msgs.map(m => `
+      <div class="agt-bubble ${isAgent?'agt-agent':'agt-user'}">
+        ${isAgent?`<div class="agt-avatar"><i data-lucide="bot" style="width:14px;height:14px"></i></div>`:''}
+        <div class="agt-text">${m}</div>
+      </div>`).join('');
+  }
+
+  function buildQuick(items){
+    if(!items||!items.length) return '';
+    return `<div class="agt-quick">${items.map(q=>`<button class="agt-quick-btn" onclick="agtSend('${q.id}')">${escapeHtml(q.label)}</button>`).join('')}</div>`;
+  }
+
+  const initHtml = buildBubbles(SCRIPTS.welcome.msgs, true) + buildQuick(SCRIPTS.welcome.quick);
+
+  const content = `
+    <div class="agt-wrap">
+      <div class="agt-header">
+        <div class="agt-header-av"><i data-lucide="bot" style="width:20px;height:20px"></i></div>
+        <div class="agt-header-info">
+          <div class="agt-header-name">Assistente TURNI.</div>
+          <div class="agt-header-status"><span class="live-dot" style="width:6px;height:6px;border-radius:50%;background:#3AAA68;box-shadow:0 0 8px #3AAA68;display:inline-block"></span> online agora</div>
+        </div>
+        <div class="agt-header-badge">MVP · atendimento</div>
+      </div>
+
+      <div class="agt-chat" id="agtChat">${initHtml}</div>
+
+      <div class="agt-input-wrap">
+        <input class="agt-input" id="agtInput" type="text" placeholder="Digite sua dúvida..." onkeydown="if(event.key==='Enter')agtSendText()">
+        <button class="agt-send" onclick="agtSendText()"><i data-lucide="send" style="width:16px;height:16px"></i></button>
+      </div>
+    </div>
+
+    <script>
+    const _agtScripts = ${JSON.stringify(SCRIPTS)};
+    function agtSend(id){
+      const script = _agtScripts[id];
+      if(!script) return;
+      const chat = document.getElementById('agtChat');
+      if(!chat) return;
+      // remove quick replies
+      chat.querySelectorAll('.agt-quick').forEach(el=>el.remove());
+      // user bubble (label)
+      const label = (document.querySelector('.agt-quick-btn[onclick*="'+id+'"]') || {}).textContent || id;
+      chat.insertAdjacentHTML('beforeend','<div class="agt-bubble agt-user"><div class="agt-text">'+label+'</div></div>');
+      // typing indicator
+      chat.insertAdjacentHTML('beforeend','<div class="agt-bubble agt-agent agt-typing" id="agtTyping"><div class="agt-avatar"><i data-lucide="bot" style="width:14px;height:14px"></i></div><div class="agt-text"><span class="agt-dots"><span></span><span></span><span></span></span></div></div>');
+      if(typeof refreshIcons==='function') refreshIcons();
+      chat.scrollTop = chat.scrollHeight;
+      setTimeout(()=>{
+        const t=document.getElementById('agtTyping');
+        if(t)t.remove();
+        let html='';
+        script.msgs.forEach(m=>{ html+='<div class="agt-bubble agt-agent"><div class="agt-avatar"><i data-lucide="bot" style="width:14px;height:14px"></i></div><div class="agt-text">'+m+'</div></div>'; });
+        if(script.quick&&script.quick.length) html+='<div class="agt-quick">'+script.quick.map(q=>'<button class="agt-quick-btn" onclick="agtSend(\\''+q.id+'\\')">'+q.label+'</button>').join('')+'</div>';
+        chat.insertAdjacentHTML('beforeend',html);
+        if(typeof refreshIcons==='function') refreshIcons();
+        chat.scrollTop=chat.scrollHeight;
+        if(script.redirect) setTimeout(()=>{ location.hash=script.redirect; },800);
+      },900);
+    }
+    function agtSendText(){
+      const inp=document.getElementById('agtInput');
+      if(!inp||!inp.value.trim()) return;
+      const txt=inp.value.trim(); inp.value='';
+      const chat=document.getElementById('agtChat');
+      chat.querySelectorAll('.agt-quick').forEach(el=>el.remove());
+      chat.insertAdjacentHTML('beforeend','<div class="agt-bubble agt-user"><div class="agt-text">'+txt+'</div></div>');
+      chat.insertAdjacentHTML('beforeend','<div class="agt-bubble agt-agent agt-typing" id="agtTyping"><div class="agt-avatar"><i data-lucide="bot" style="width:14px;height:14px"></i></div><div class="agt-text"><span class="agt-dots"><span></span><span></span><span></span></span></div></div>');
+      chat.scrollTop=chat.scrollHeight;
+      const low=txt.toLowerCase();
+      let match='consultor';
+      if(low.includes('plan')) match='planos';
+      else if(low.includes('cust')||low.includes('taxa')||low.includes('pag')) match='custo';
+      else if(low.includes('match')||low.includes('profis')||low.includes('candidat')) match='match';
+      else if(low.includes('funciona')||low.includes('como')) match='como-funciona';
+      else if(low.includes('simul')) match='simular';
+      setTimeout(()=>{
+        const t=document.getElementById('agtTyping'); if(t)t.remove();
+        const script=_agtScripts[match];
+        let html='';
+        script.msgs.forEach(m=>{ html+='<div class="agt-bubble agt-agent"><div class="agt-avatar"><i data-lucide="bot" style="width:14px;height:14px"></i></div><div class="agt-text">'+m+'</div></div>'; });
+        if(script.quick&&script.quick.length) html+='<div class="agt-quick">'+script.quick.map(q=>'<button class="agt-quick-btn" onclick="agtSend(\\''+q.id+'\\')">'+q.label+'</button>').join('')+'</div>';
+        chat.insertAdjacentHTML('beforeend',html);
+        if(typeof refreshIcons==='function') refreshIcons();
+        chat.scrollTop=chat.scrollHeight;
+      },900);
+    }
+    <\/script>
+  `;
+
+  renderLayout({nav, title:'Atendimento', content});
+}
+
 // ── ADMIN ──────────────────────────────────────────────────────
 function renderAdmin(params){
   const u = Session.user();
@@ -6944,7 +7280,8 @@ function getNavEmp(u, active){
     {label:'Vagas', icon:'briefcase', hash:'#/contratante/vagas', count:minhasAtivas.length, active:active==='vagas'},
     {label:'Turnos', icon:'list', hash:'#/contratante/turnos', count:turnosAtivos.length, active:active==='turnos'},
     {label:'Financeiro', icon:'wallet', hash:'#/contratante/financeiro', active:active==='financeiro'},
-    {label:'Empresa', icon:'building-2', hash:'#/contratante/empresa', active:active==='empresa'}
+    {label:'Empresa', icon:'building-2', hash:'#/contratante/empresa', active:active==='empresa'},
+    {label:'Atendimento', icon:'message-circle', hash:'#/contratante/atendimento', active:active==='atendimento'}
   ];
 }
 
